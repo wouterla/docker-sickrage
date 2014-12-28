@@ -1,7 +1,11 @@
-FROM ubuntu:14.04
+FROM debian:wheezy
 MAINTAINER Tim Haak <tim@haak.co.uk>
 
+ENV DEBIAN_FRONTEND noninteractive
 ENV SICKRAGE_VERSION master
+ENV LANG en_US.UTF-8
+ENV LC_ALL C.UTF-8
+ENV LANGUAGE en_US.UTF-8
 
 RUN apt-get -q update && \
     apt-get -qy --force-yes dist-upgrade && \
