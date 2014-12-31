@@ -20,6 +20,7 @@ RUN apt-get -q update && \
 
 VOLUME /config
 VOLUME /data
+VOLUME /scripts
 
 ADD ./start.sh /start.sh
 RUN chmod u+x  /start.sh
