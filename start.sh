@@ -9,10 +9,10 @@ then
 else
 	touch /config/config.ini
 	touch /config/sickbeard.db
-#	mv -f /sickbeard/autoprocesstv/autoProcessTV.cfg /config/autoProcessTV.cfg
+#	mv -f /sickbeard/autoprocesstv/autoProcessTV.cfg.sample /config/autoProcessTV.cfg
 fi
 ln -sf /config/config.ini /sickrage/config.ini
 ln -sf /config/sickbeard.db /sickrage/sickbeard.db
-#ln -sf /config/autoProcessTV.cfg sickbeard/autoprocesstv/autoProcessTV.cfg
+cp -ra /sickbeard/autoprocesstv /scripts
 
 /usr/bin/python SickBeard.py
