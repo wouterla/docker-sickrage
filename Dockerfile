@@ -1,4 +1,4 @@
-FROM debian:wheezy
+FROM ubuntu:14.04
 MAINTAINER Tim Haak <tim@haak.co.uk>
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -7,9 +7,10 @@ ENV LANG en_US.UTF-8
 ENV LC_ALL C.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
-RUN apt-get -q update && \
+RUN sed -i "/^# deb.*multiverse/ s/^# //" /etc/apt/sources.list && \
+    apt-get -q update && \
     apt-get -qy --force-yes dist-upgrade && \
-    apt-get install -qy --force-yes python-cheetah wget tar ca-certificates curl unrar-free  && \
+    apt-get install -qy --force-yes python-cheetah wget tar ca-certificates curl unrar && \
     curl -L https://github.com/SiCKRAGETV/SickRage/tarball/${SICKRAGE_VERSION} -o sickrage.tgz && \
     tar -xvf sickrage.tgz -C /  &&\
     mv /SiCKRAGETV-SickRage-* /sickrage/ &&\
