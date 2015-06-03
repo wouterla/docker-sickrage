@@ -1,28 +1,23 @@
-FROM debian:wheezy
-MAINTAINER Tim Haak <tim@haak.co.uk>
+FROM timhaak/base:latest
+MAINTAINER tim@haak.co.uk
 
-ENV DEBIAN_FRONTEND noninteractive
-ENV SICKRAGE_VERSION master
-ENV LANG en_US.UTF-8
-ENV LC_ALL C.UTF-8
-ENV LANGUAGE en_US.UTF-8
+ENV SICKRAGE_VERSION="master"
 
 RUN apt-get -q update && \
-    apt-get -qy --force-yes dist-upgrade && \
-    apt-get install -qy --force-yes python-cheetah wget tar ca-certificates curl unrar-free  && \
+    apt-get install -qy --force-yes python-cheetah && \
     curl -L https://github.com/SiCKRAGETV/SickRage/tarball/${SICKRAGE_VERSION} -o sickrage.tgz && \
-    tar -xvf sickrage.tgz -C /  &&\
-    mv /SiCKRAGETV-SickRage-* /sickrage/ &&\
-    rm  /sickrage.tgz &&\
-    apt-get clean &&\
-    rm -rf /var/lib/apt/lists/* &&\
+    tar -xvf sickrage.tgz -C /  && \
+    mv /SiCKRAGETV-SickRage-* /sickrage/ && \
+    rm  /sickrage.tgz && \
+    apt-get -y autoremove && \
+    apt-get -y clean && \
+    rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/*
-
-VOLUME /config
-VOLUME /data
 
 ADD ./start.sh /start.sh
 RUN chmod u+x  /start.sh
+
+VOLUME ["/config", "/data"]
 
 EXPOSE 8081
 
