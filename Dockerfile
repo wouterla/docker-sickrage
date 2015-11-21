@@ -1,18 +1,21 @@
-FROM timhaak/base:latest
-MAINTAINER tim@haak.co.uk
+FROM alpine:edge
+MAINTAINER tim@haak.co
 
-ENV SICKRAGE_VERSION="master"
+ENV LANG='en_US.UTF-8' \
+    LANGUAGE='en_US.UTF-8' \
+    TERM='xterm'
 
-RUN apt-get -q update && \
-    apt-get install -qy --force-yes python-cheetah python-openssl && \
-    curl -L https://github.com/SiCKRAGETV/SickRage/tarball/${SICKRAGE_VERSION} -o sickrage.tgz && \
-    tar -xvf sickrage.tgz -C /  && \
-    mv /SiCKRAGETV-SickRage-* /sickrage/ && \
-    rm  /sickrage.tgz && \
-    apt-get -y autoremove && \
-    apt-get -y clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    rm -rf /tmp/*
+RUN apk -U upgrade && \
+    apk -U add \
+        ca-certificates \
+        py-pip ca-certificates git python py-libxml2 py-lxml \
+        make gcc g++ python-dev openssl-dev libffi-dev \
+        && \
+    pip --no-cache-dir install pyopenssl cheetah && \
+    git clone --depth 1 http://github.com/SiCKRAGETV/SickRage /sickrage && \
+    apk del make gcc g++ python-dev && \
+    rm -rf /tmp && \
+    rm -rf /var/cache/apk/*
 
 ADD ./start.sh /start.sh
 RUN chmod u+x  /start.sh
