@@ -12,3 +12,7 @@ docker build -t sickrage .
 
 docker run --restart=always -d -h *your_host_name* -v /*your_config_location*:/config  -v /*your_videos_location*:/data -p 8081:8081 sickrage
 
+If you want me to change to the new fork. 
+
+The answere is No till they have rebranded. 
+
