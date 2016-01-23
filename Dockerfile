@@ -11,8 +11,8 @@ RUN apk -U upgrade && \
         py-pip ca-certificates git python py-libxml2 py-lxml \
         make gcc g++ python-dev openssl-dev libffi-dev unrar \
         && \
-    pip --no-cache-dir install pyopenssl cheetah && \
-    git clone --depth 1 http://github.com/SiCKRAGETV/SickRage /sickrage && \
+    pip --no-cache-dir install pyopenssl cheetah requirements && \
+    git clone --depth 1 https://github.com/SickRage/SickRage.git /sickrage && \
     apk del make gcc g++ python-dev && \
     rm -rf /tmp && \
     rm -rf /var/cache/apk/*
@@ -20,7 +20,7 @@ RUN apk -U upgrade && \
 ADD ./start.sh /start.sh
 RUN chmod u+x  /start.sh
 
-VOLUME ["/config", "/data"]
+VOLUME ["/config", "/data" "/cache"]
 
 EXPOSE 8081
 

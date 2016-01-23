@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker build --rm --no-cache -t timhaak/sickrage .
+docker build --rm --no-cache --pull -t timhaak/sickrage .
