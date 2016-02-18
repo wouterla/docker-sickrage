@@ -1,26 +1,24 @@
-FROM debian:wheezy
+FROM alpine:edge
 MAINTAINER Tim Haak <tim@haak.co.uk>
 
-ENV DEBIAN_FRONTEND noninteractive
-ENV SICKRAGE_VERSION master
-ENV LANG en_US.UTF-8
-ENV LC_ALL C.UTF-8
-ENV LANGUAGE en_US.UTF-8
 
-RUN apt-get -q update && \
-    apt-get -qy --force-yes dist-upgrade && \
-    apt-get install -qy --force-yes python-cheetah wget tar ca-certificates curl unrar-free  && \
-    curl -L https://github.com/SiCKRAGETV/SickRage/tarball/${SICKRAGE_VERSION} -o sickrage.tgz && \
-    tar -xvf sickrage.tgz -C /  &&\
-    mv /SiCKRAGETV-SickRage-* /sickrage/ &&\
-    rm  /sickrage.tgz &&\
-    apt-get clean &&\
-    rm -rf /var/lib/apt/lists/* &&\
-    rm -rf /tmp/*
+ENV LANG='en_US.UTF-8' \
+    LANGUAGE='en_US.UTF-8' \
+    TERM='xterm'
 
-VOLUME /config
-VOLUME /data
-VOLUME /scripts
+RUN apk -U upgrade && \
+    apk -U add \
+        ca-certificates \
+        py-pip ca-certificates git python py-libxml2 py-lxml \
+        make gcc g++ python-dev openssl-dev libffi-dev unrar \
+        && \
+    pip --no-cache-dir install pyopenssl cheetah requirements && \
+    git clone --depth 1 https://github.com/SickRage/SickRage.git /sickrage && \
+    apk del make gcc g++ python-dev && \
+    rm -rf /tmp && \
+    rm -rf /var/cache/apk/*
+
+VOLUME ["/config", "/data" "/cache", "/scripts"]
 
 ADD ./start.sh /start.sh
 RUN chmod u+x  /start.sh
