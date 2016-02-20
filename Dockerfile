@@ -18,7 +18,7 @@ RUN apk -U upgrade && \
     rm -rf /tmp && \
     rm -rf /var/cache/apk/*
 
-VOLUME ["/config", "/data" "/cache", "/scripts"]
+VOLUME ["/config", "/data", "/cache", "/scripts"]
 
 ADD ./start.sh /start.sh
 RUN chmod u+x  /start.sh
