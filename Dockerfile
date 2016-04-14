@@ -20,7 +20,7 @@ RUN apk -U upgrade && \
 ADD ./start.sh /start.sh
 RUN chmod u+x  /start.sh
 
-VOLUME ["/config", "/data" "/cache"]
+VOLUME ["/config", "/data", "/cache"]
 
 EXPOSE 8081
 
