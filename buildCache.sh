@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker build --rm -t timhaak/sickrage .
+docker build  --pull --rm -t timhaak/sickrage .
