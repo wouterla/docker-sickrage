@@ -9,7 +9,7 @@ RUN apk -U upgrade && \
     apk -U add \
         ca-certificates \
         py2-pip ca-certificates git python py-libxml2 py-lxml \
-        make gcc g++ python-dev openssl-dev libffi-dev unrar tzdata \
+        make gcc g++ python-dev openssl-dev libffi-dev unrar tzdata nodejs \
         && \
     pip --no-cache-dir install --upgrade setuptools && \
     pip --no-cache-dir install --upgrade pyopenssl cheetah requirements && \
