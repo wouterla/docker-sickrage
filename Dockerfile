@@ -11,7 +11,7 @@ RUN apk -U upgrade && \
         gcc git g++ \
         linux-headers libxml2 libxml2-dev libffi-dev libxslt-dev \
         py2-pip python python-dev py-libxml2 py2-libxslt py-lxml \
-        make \
+        make mercurial \
         nodejs \
         openssl-dev \
         tzdata \
@@ -20,8 +20,8 @@ RUN apk -U upgrade && \
     pip install --upgrade pip && \
     pip --no-cache-dir install --upgrade setuptools && \
     pip --no-cache-dir install --upgrade pyopenssl cheetah requirements && \
-    git clone --depth 1 https://github.com/SickChill/SickChill.git /sickrage && \
-    pip install --user -U -r /sickrage/requirements.txt && \
+    git clone --depth 1 https://github.com/SickChill/SickChill.git /SickChill && \
+#    pip install --user -U -r /SickChill/requirements/requirements.txt  && \
     apk del make gcc g++ python-dev && \
     rm -rf /tmp && \
     rm -rf /var/cache/apk/*
