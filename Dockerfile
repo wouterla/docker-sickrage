@@ -20,7 +20,7 @@ RUN apk -U upgrade && \
     pip install --upgrade pip && \
     pip --no-cache-dir install --upgrade setuptools && \
     pip --no-cache-dir install --upgrade pyopenssl cheetah requirements && \
-    git clone --depth 1 https://github.com/SickRage/SickRage.git /sickrage && \
+    git clone --depth 1 https://github.com/SickChill/SickChill.git /sickrage && \
     pip install --user -U -r /sickrage/requirements.txt && \
     apk del make gcc g++ python-dev && \
     rm -rf /tmp && \
