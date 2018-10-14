@@ -8,9 +8,16 @@ ENV LANG='en_US.UTF-8' \
 RUN apk -U upgrade && \
     apk -U add \
         ca-certificates \
-        py2-pip ca-certificates git python py-libxml2 py-lxml \
-        make gcc g++ python-dev openssl-dev libffi-dev unrar tzdata nodejs \
+        gcc git g++ \
+        linux-headers libxml2 libxml2-dev libffi-dev libxslt-dev \
+        py2-pip python python-dev py-libxml2 py2-libxslt py-lxml \
+        make \
+        nodejs \
+        openssl-dev \
+        tzdata \
+        unrar \
         && \
+    pip install --upgrade pip && \
     pip --no-cache-dir install --upgrade setuptools && \
     pip --no-cache-dir install --upgrade pyopenssl cheetah requirements && \
     git clone --depth 1 https://github.com/SickRage/SickRage.git /sickrage && \
